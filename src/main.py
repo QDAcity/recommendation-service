@@ -16,9 +16,9 @@ class Recommendation(BaseModel):
 
 app = FastAPI()
 
-origins = [
-    "*"
-]
+# origins = [
+#     "*"
+# ]
 
 # app.add_middleware(
 #     CORSMiddleware,
@@ -38,7 +38,6 @@ async def get_recommendation(token: UUID, text: str):
     # print(data["token"])
     # print(data["token"]==TOKEN[0])
     valid_token = next( (token for token in TOKEN if str(token) == str(token)), None)
-    valid_token = True
     if valid_token:
         handler = EvalHandler(model_path=MODEL_PATH)
         result = handler.predict(text)
