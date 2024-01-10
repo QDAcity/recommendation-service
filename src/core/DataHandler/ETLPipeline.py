@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import apache_beam as beam
 from apache_beam.io.gcp.datastore.v1new.types import Query
 from apache_beam.io import WriteToBigQuery
+from apache_beam.io.gcp.datastore.v1new.datastoreio import ReadFromDatastore
 from apache_beam.options.pipeline_options import PipelineOptions, GoogleCloudOptions
 from typing import List, Dict
 
@@ -34,7 +35,7 @@ class DatastoreToBigQueryPipeline:
         with beam.Pipeline(options=options) as p:
             # Read from Datastore
             datastore_query = Query(self.project, self.namespace, self.kind)
-            datastore_data = p | 'ReadFromDatastore' >> beam.io.gcp.datastore.v1new.ReadFromDatastore(
+            datastore_data = p | 'ReadFromDatastore' >> ReadFromDatastore(
                 query=datastore_query)
 
             # Transform the data (will check later)
@@ -72,3 +73,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+    

@@ -20,3 +20,4 @@ read.json
 *.flf
 #Test results file
 TestResults.xml
+.data/
